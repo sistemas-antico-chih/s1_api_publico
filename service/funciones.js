@@ -19,6 +19,9 @@ function datosGenerales(datosGenerales){
     if (datosGenerales.segundoApellido === null){
         datosGenerales.segundoApellido = "";
     }
+    if (datosGenerales.nacionalidad === "MEX"){
+        datosGenerales.nacionalidad = "MX"
+    }
     if (datosGenerales.correoElectronico){
         if(datosGenerales.correoElectronico.institucional === null)
             datosGenerales.correoElectronico.institucional = datosGenerales.correoElectronico.personal;
@@ -148,7 +151,7 @@ function experienciaLaboral(experienciaLaboral){
 }
 
 function ingresos(ingresos, tipoDeclaracion){
-    if(tipoDeclaracion === "INICIAL"){
+    if(tipoDeclaracion === "MODIFICACION"){
         ingresos['remuneracionAnualCargoPublico'] = ingresos['remuneracionMensualCargoPublico'];
         ingresos['ingresoAnualNetoDeclarante'] = ingresos['ingresoMensualNetoDeclarante'];
         ingresos['totalIngresosAnualesNetos'] = ingresos['totalIngresosMensualesNetos'];
@@ -324,8 +327,8 @@ function bienesInmuebles(bienInmueble){
     if(n.formaPago ===  'NO_APLICA'){
       n.formaPago = 'NO APLICA';
     }
-    if(n.formaPago ===  'ESCRITURA_PUBLICA'){
-      n.formaPago = 'ESCRITURA PÚBLICA';
+    if(n.valorConformeA ===  'ESCRITURA_PUBLICA'){
+      n.valorConformeA = 'ESCRITURA PÚBLICA';
     }
     return n;
   })
@@ -433,6 +436,17 @@ function adeudosPasivos(adeudo){
 
 function inversionesCuentasValores(inversion){
   inversion.forEach((n) => {
+    if(n.localizacionInversion){
+      if(n.localizacionInversion.institucionRazonSocial === null){
+        n.localizacionAdeudo.institucionRazonSocial = "";
+      }
+      if(n.localizacionInversion.rfc === null){
+        n.localizacionInversion = "";
+      }
+      if(n.localizacionInversion.pais === null){
+        n.localizacionInversion.pais = "MX";
+      }
+    }
     if (n.tercero[0].tipoPersona === null) {
       delete n.tercero;
     }
@@ -446,17 +460,6 @@ function inversionesCuentasValores(inversion){
     }
     if(n.motivoBaja === null){
       delete n.motivoBaja;
-    }
-    if(n.localizacionInversion){
-      if(n.localizacionInversion.institucionRazonSocial === null){
-        n.localizacionAdeudo.institucionRazonSocial = "";
-      }
-      if(n.localizacionInversion.rfc === null){
-        n.localizacionInversion = "";
-      }
-      if(n.localizacionInversion.pais === null){
-        n.localizacionInversion = "MX";
-      }
     }
     if(n.saldoSituacionActual){
       if(n.saldoSituacionActual.moneda === null){
