@@ -209,6 +209,9 @@ function datosPareja(datosPareja){
     if(datosPareja.segundoApellido === null){
         datosPareja.segundoApellido = "";
     }
+    if (rowExtend.datosPareja.actividadLaboral.clave === 'OTR') {
+      rowExtend.datosPareja.actividadLaboral.clave = 'OTRO'
+    }
     return datosPareja;
 }
 
@@ -330,6 +333,8 @@ function bienesInmuebles(bienInmueble){
     if(n.valorConformeA ===  'ESCRITURA_PUBLICA'){
       n.valorConformeA = 'ESCRITURA PÚBLICA';
     }
+    n.superficieTerreno.valor = Math.floor(n.superficieTerreno.valor);
+    n.superficieConstruccion.valor = Math.floor(n.superficieConstruccion.valor);
     return n;
   })
   return bienInmueble;
@@ -352,14 +357,17 @@ function vehiculos(vehiculo){
     if(n.lugarRegistro.pais === null || !n.lugarRegistro.pais){
       n.lugarRegistro.pais = "MX";
     }
+    if (n.lugarRegistro.entidadFederativa === null) {
+      n.lugarRegistro.entidadFederativa = "";
+    }
+    if (n.lugarRegistro.pais != 'MX') {
+      delete n.lugarRegistro.entidadFederativa;
+    }
     if(n.motivoBaja === null){
       delete n.motivoBaja;
     }
-    if(n.lugarRegistro.entidadFederativa === null){
-      n.lugarRegistro.entidadFederativa = "";
-    }
     if(n.formaPago ===  'CREDITO'){
-      n.formaPago = 'CR ^iDITO';
+      n.formaPago = 'CRÉDITO';
     }
     if(n.formaPago ===  'NO_APLICA'){
       n.formaPago = 'NO APLICA';
@@ -387,7 +395,7 @@ function bienesMuebles(bienMueble){
       delete n.motivoBaja;
     }
     if(n.formaPago ===  'CREDITO'){
-      n.formaPago = 'CR ^iDITO';
+      n.formaPago = 'CRÉDITO';
     }
     if(n.formaPago ===  'NO_APLICA'){
       n.formaPago = 'NO APLICA';
