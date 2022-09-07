@@ -209,8 +209,8 @@ function datosPareja(datosPareja){
     if(datosPareja.segundoApellido === null){
         datosPareja.segundoApellido = "";
     }
-    if (rowExtend.datosPareja.actividadLaboral.clave === 'OTR') {
-      rowExtend.datosPareja.actividadLaboral.clave = 'OTRO'
+    if (datosPareja.actividadLaboral.clave === 'OTR') {
+        datosPareja.actividadLaboral.clave = 'OTRO'
     }
     return datosPareja;
 }
