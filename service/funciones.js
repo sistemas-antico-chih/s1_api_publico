@@ -22,6 +22,9 @@ function datosGenerales(datosGenerales){
     if (datosGenerales.nacionalidad === "MEX"){
         datosGenerales.nacionalidad = "MX"
     }
+    if (datosGenerales.nacionalidad !== "MEX"){
+      datosGenerales.nacionalidad = datosGenerales.paisNacimiento;
+  }
     if (datosGenerales.correoElectronico){
         if(datosGenerales.correoElectronico.institucional === null)
             datosGenerales.correoElectronico.institucional = datosGenerales.correoElectronico.personal;
@@ -508,10 +511,10 @@ function prestamoComodato(prestamo){
 function participacion(participacion){
   participacion.forEach((n)=>{
     if(n.tipoOperacion === null){
-      n.tipoOperacion = "AGREGAR";
+      delete n.tipoOperacion;
     }
-    if(n.montoMensual === null){
-      n.montoMensual = "";
+    if(n.recibeRemuneracion === false){
+      delete n.montoMensual;
     }
     if(n.montoMensual){
       if(n.montoMensual.moneda === null){
@@ -534,8 +537,8 @@ function tomaDeciciones(tomaDecision){
     if(n.tipoOperacion === null){
       n.tipoOperacion = "AGREGAR";
     }
-    if(n.montoMensual === null){
-      n.montoMensual = "";
+    if(n.recibeRemuneracion === false){
+      delete n.montoMensual;
     }
     if(n.montoMensual){
       if(n.montoMensual.moneda === null){
