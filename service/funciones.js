@@ -515,6 +515,7 @@ function participacion(participacion){
     }
     if(n.recibeRemuneracion === false){
       delete n.montoMensual;
+      delete n.porcentajeParticipacion;
     }
     if(n.montoMensual){
       if(n.montoMensual.moneda === null){
