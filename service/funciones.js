@@ -452,7 +452,7 @@ function inversionesCuentasValores(inversion){
         n.localizacionAdeudo.institucionRazonSocial = "";
       }
       if(n.localizacionInversion.rfc === null){
-        n.localizacionInversion = "";
+        n.localizacionInversion.rfc = "";
       }
       if(n.localizacionInversion.pais === null){
         n.localizacionInversion.pais = "MX";
