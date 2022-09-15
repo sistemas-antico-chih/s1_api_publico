@@ -573,12 +573,9 @@ function representaciones(representacion){
     if(n.tipoOperacion === null){
       n.tipoOperacion = "AGREGAR";
     }
-    if(n.montoMensual === null){
-      n.montoMensual = "";
-    }
-    if(n.montoMensual){
-      if(n.montoMensual.moneda === null){
-        n.montoMensual.moneda = "MXN";
+    if(n.recibeRemuneracion === false){
+      if(n.montoMensual){
+        delete n.montoMensual;
       }
     }
     if(n.ubicacion){
