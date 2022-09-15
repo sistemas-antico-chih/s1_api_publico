@@ -573,8 +573,8 @@ function representaciones(representacion){
     if(n.tipoOperacion === null){
       n.tipoOperacion = "AGREGAR";
     }
-    if(n.recibeRemuneracion === false){
-      if(n.montoMensual){
+    if(n.recibeRemuneracion = false){
+      if(n.montoMensual === null){
         delete n.montoMensual;
       }
     }
