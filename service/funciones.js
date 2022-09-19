@@ -535,6 +535,9 @@ function participacion(participacion){
         n.ubicacion.pais = "MX";
       }
     }
+    if(n.porcentajeParticipacion === 0){
+      n.porcentajeParticipacion = 1;
+    }
     return n;
   })
   return participacion;
