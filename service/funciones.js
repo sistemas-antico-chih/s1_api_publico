@@ -485,6 +485,9 @@ function inversionesCuentasValores(inversion){
 function prestamoComodato(prestamo){
   prestamo.forEach((n) => {
     if(n.tipoBien){
+      if(n.tipoBien.inmueble === null){
+        delete n.tipoBien.inmueble;
+      }
       if(n.tipoBien.inmueble){
         if(n.tipoBien.inmueble.domicilioMexico){
           if(n.tipoBien.inmueble.domicilioMexico.numeroInterior === null){
@@ -498,6 +501,12 @@ function prestamoComodato(prestamo){
         }
       }
       if (n.tipoBien.vehiculo) {
+        if (n.tipoBien.vehiculo === null){
+          delete n.tipoBien.vehiculo;
+        }
+        if (n.tipoBien.vehiculo.lugarRegistro.pais === null){
+          n.tipoBien.vehiculo.lugarRegistro.pais = 'MX';
+        }
         if (n.tipoBien.vehiculo.lugarRegistro.pais != 'MX') {
           delete n.tipoBien.vehiculo.lugarRegistro.entidadFederativa;
         }
