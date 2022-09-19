@@ -574,7 +574,6 @@ function representaciones(representacion){
       n.tipoOperacion = "AGREGAR";
     }
     if(n.recibeRemuneracion === false){
-        console.log("llega");
       if(n.montoMensual === null){
         delete n.montoMensual;
       }
@@ -603,6 +602,9 @@ function clientesPrincipales(cliente){
       }
       if(n.ubicacion.entidadFederativa === null){
         n.ubicacion.entidadFederativa = "";
+      }
+      if(n.ubicacion.pais !== 'MX'){
+        delete n.ubicacion.entidadFederativa;
       }
     }
     if(n.clientePrincipal === null){
