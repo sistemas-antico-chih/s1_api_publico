@@ -17,7 +17,7 @@ function convertirFechaCorta(fecha) {
 
 function datosGenerales(datosGenerales){
     if (datosGenerales.segundoApellido === null){
-        datosGenerales.segundoApellido = "";
+        datosGenerales.segundoApellido = "zz";
     }
     if (datosGenerales.nacionalidad === "MEX"){
         datosGenerales.nacionalidad = "MX"
