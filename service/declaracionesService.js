@@ -58,6 +58,7 @@ async function post_declaraciones(body) {
     '__v': 0,
     'createdAt': 0,
     'datosGenerales._id': 0,
+    'datosGenerales.hasNull': 0,
     'datosGenerales.rfc._id':0,
     'datosGenerales.correoElectronico._id': 0,
     'datosGenerales.telefono._id': 0,
