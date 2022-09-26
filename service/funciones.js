@@ -590,6 +590,11 @@ function representaciones(representacion){
         delete n.montoMensual;
       }
     }
+    if(n.montoMensual){
+      if(n.montoMensual.moneda === null){
+        n.montoMensual.moneda = "MXN"
+      }
+    }
     if(n.ubicacion){
       if(n.ubicacion.pais === null){
         n.ubicacion.pais = "MX";
