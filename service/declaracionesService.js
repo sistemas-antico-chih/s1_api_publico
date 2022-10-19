@@ -299,7 +299,7 @@ async function post_declaraciones(body) {
         newSort["datosGenerales.primerApellido"] = value
       }
       if (key === "segundoApellido") {
-          newSort={"datosGenerales.hasNull":value, "datosGenerales.segundoApellido":value}      
+          newSort={"datosGenerales.segundoApellido":value}      
       }
       if (key === "escolaridadNivel") {
         newSort["datosCurricularesDeclarante.escolaridad.nivel.clave"] = value

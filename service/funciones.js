@@ -1,294 +1,293 @@
 function convertirFechaLarga(fecha) {
-    let year =  fecha.getFullYear();
-    let month = fecha.getMonth() + 1 < 10 ? '0' + (fecha.getMonth() + 1) : fecha.getMonth() + 1;
-    let day = fecha.getDate() < 10 ? '0' + (fecha.getDate()) : fecha.getDate();
-    let hour = fecha.getHours() < 10 ? '0' + (fecha.getHours()) : fecha.getHours();
-    let minute = fecha.getMinutes() < 10 ? '0' + (fecha.getMinutes()) : fecha.getMinutes();
-    let seconds = fecha.getSeconds() < 10 ? '0' + (fecha.getSeconds()) : fecha.getSeconds();
-    return year + '-' + month + '-' + day + 'T' + hour + ':' + minute + ':' + seconds + 'Z';
+  let year = fecha.getFullYear();
+  let month = fecha.getMonth() + 1 < 10 ? '0' + (fecha.getMonth() + 1) : fecha.getMonth() + 1;
+  let day = fecha.getDate() < 10 ? '0' + (fecha.getDate()) : fecha.getDate();
+  let hour = fecha.getHours() < 10 ? '0' + (fecha.getHours()) : fecha.getHours();
+  let minute = fecha.getMinutes() < 10 ? '0' + (fecha.getMinutes()) : fecha.getMinutes();
+  let seconds = fecha.getSeconds() < 10 ? '0' + (fecha.getSeconds()) : fecha.getSeconds();
+  return year + '-' + month + '-' + day + 'T' + hour + ':' + minute + ':' + seconds + 'Z';
 }
 
 function convertirFechaCorta(fecha) {
-    let y = fecha.getFullYear();
-    let m = fecha.getMonth() + 1 < 10 ? '0' + (fecha.getMonth() + 1) : fecha.getMonth() + 1;
-    let d = fecha.getDate() < 10 ? '0' + (fecha.getDate()) : fecha.getDate();
-    return y + '-' + m + '-' + d;
+  let y = fecha.getFullYear();
+  let m = fecha.getMonth() + 1 < 10 ? '0' + (fecha.getMonth() + 1) : fecha.getMonth() + 1;
+  let d = fecha.getDate() < 10 ? '0' + (fecha.getDate()) : fecha.getDate();
+  return y + '-' + m + '-' + d;
 }
 
-function datosGenerales(datosGenerales){
-    if (datosGenerales.segundoApellido === null){
-        datosGenerales.segundoApellido = "";
-    }
-    if (datosGenerales.nacionalidad === "MEX"){
-        datosGenerales.nacionalidad = "MX"
-    }
-    if (datosGenerales.nacionalidad !== "MEX"){
-      datosGenerales.nacionalidad = datosGenerales.paisNacimiento;
+function datosGenerales(datosGenerales) {
+  if (datosGenerales.segundoApellido === null) {
+    datosGenerales.segundoApellido = "";
   }
-    if (datosGenerales.correoElectronico){
-        if(datosGenerales.correoElectronico.institucional === null)
-            datosGenerales.correoElectronico.institucional = datosGenerales.correoElectronico.personal;
-    }
-    if (datosGenerales.situacionPersonalEstadoCivil.clave === "CON") {
-        datosGenerales.situacionPersonalEstadoCivil.valor = "CONCUBINA/CONCUBINARIO/UNIÓN LIBRE"
-    }
-
-    return datosGenerales;
+  if (datosGenerales.nacionalidad === "MEX") {
+    datosGenerales.nacionalidad = "MX"
+  }
+  if (datosGenerales.nacionalidad !== "MEX") {
+    datosGenerales.nacionalidad = datosGenerales.paisNacimiento;
+  }
+  if (datosGenerales.correoElectronico) {
+    if (datosGenerales.correoElectronico.institucional === null)
+      datosGenerales.correoElectronico.institucional = datosGenerales.correoElectronico.personal;
+  }
+  if (datosGenerales.situacionPersonalEstadoCivil.clave === "CON") {
+    datosGenerales.situacionPersonalEstadoCivil.valor = "CONCUBINA/CONCUBINARIO/UNIÓN LIBRE"
+  }
+  return datosGenerales;
 }
 
-function datosCurricularesDeclarante(datosCurricularesDeclarante){
-    if (datosCurricularesDeclarante.escolaridad.length >= 1) {
-        datosCurricularesDeclarante.escolaridad.forEach((n) => {
-            if(n.carreraAreaConocimiento === null){
-                n.carreraAreaConocimiento = "";
-            }
-        n.fechaObtencion = convertirFechaCorta(n.fechaObtencion);
-        return n;
-        })
-    }
-    return datosCurricularesDeclarante;
-}
-
-function datosEmpleoCargoComision(datosEmpleoCargoComision){
-    datosEmpleoCargoComision.fechaTomaPosesion = convertirFechaCorta(datosEmpleoCargoComision.fechaTomaPosesion);
-    if(datosEmpleoCargoComision.telefonoOficina.extension === null){
-        datosEmpleoCargoComision.telefonoOficina.extension = "";
-    }
-    if(datosEmpleoCargoComision.telefonoOficina.telefono === null){
-        datosEmpleoCargoComision.telefonoOficina.telefono = "";
-    }
-    if(datosEmpleoCargoComision.domicilioMexico){
-        if(datosEmpleoCargoComision.domicilioMexico.numeroInterior === null){
-            datosEmpleoCargoComision.domicilioMexico.numeroInterior = "";
-        }
-    }
-    if(datosEmpleoCargoComision.domicilioExtranjero){
-        if(datosEmpleoCargoComision.domicilioExtranjero.numeroInterior === null){
-            datosEmpleoCargoComision.domicilioExtranjero.numeroInterior = "";
-        }
-    }
-    return datosEmpleoCargoComision;
-}
-
-function domicilioDeclarante(domicilioDeclarante){
-    if(domicilioDeclarante.domicilioMexico){
-        if(domicilioDeclarante.domicilioMexico.numeroInterior === null){
-            domicilioDeclarante.domicilioMexico.numeroInterior = "";
-        }
-    }
-    if(domicilioDeclarante.domicilioExtranjero){
-        if(domicilioDeclarante.domicilioExtranjero.numeroInterior === null){
-            domicilioDeclarante.domicilioExtranjero.numeroInterior = "";
-        }
-    }
-    return domicilioDeclarante;
-}
-
-function experienciaLaboral(experienciaLaboral){
-    if (experienciaLaboral.experiencia.length >= 1) {
-        var experiencia = experienciaLaboral.experiencia;
-        experiencia.forEach((n) => {
-            n.fechaIngreso = convertirFechaCorta(n.fechaIngreso);
-            n.fechaEgreso = convertirFechaCorta(n.fechaEgreso);
-            if(n.rfc === null){
-                n.rfc = "";
-              }
-              if(n.ambitoSector.clave === "PRV"){
-                if(n.nivelOrdenGobierno === null){
-                  n.nivelOrdenGobierno = "";
-                }
-                if(n.ambitoPublico === null){
-                  n.ambitoPublico = "";
-                }
-                if(n.nombreEntePublico === null){
-                  n.nombreEntePublico = "";
-                }
-                if(n.areaAdscripcion === null){
-                  n.areaAdscripcion = "";
-                }
-                if(n.empleoCargoComision === null){
-                  n.empleoCargoComision = "";
-                }
-                if(n.funcionPrincipal === null){
-                  n.funcionPrincipal = "";
-                }
-              }
-              if(n.ambitoSector.clave === "PUB"){
-                if(n.nombreEmpresaSociedadAsociacion === null){
-                  n.nombreEmpresaSociedadAsociacion = "";
-                }
-                if(n.area === null){
-                  n.area = "";
-                }
-                if(n.puesto === null){
-                  n.puesto = "";
-                }
-                if(n.sector === null){
-                  n.sector = "";
-                }
-              }
-              if(n.ambitoSector.clave === "OTR"){
-                if(n.nivelOrdenGobierno === null){
-                  n.nivelOrdenGobierno = "";
-                }
-                if(n.ambitoPublico === null){
-                  n.ambitoPublico = "";
-                }
-                if(n.nombreEntePublico === null){
-                  n.nombreEntePublico = "";
-                }
-                if(n.areaAdscripcion === null){
-                  n.areaAdscripcion = "";
-                }
-                if(n.empleoCargoComision === null){
-                  n.empleoCargoComision = "";
-                }
-                if(n.funcionPrincipal === null){
-                  n.funcionPrincipal = "";
-                }
-              }
-            return n;
-        })
-    }
-    return experiencia;
-}
-
-function ingresos(ingresos, tipoDeclaracion){
-    if(tipoDeclaracion === "MODIFICACION"){
-        ingresos['remuneracionAnualCargoPublico'] = ingresos['remuneracionMensualCargoPublico'];
-        ingresos['ingresoAnualNetoDeclarante'] = ingresos['ingresoMensualNetoDeclarante'];
-        ingresos['totalIngresosAnualesNetos'] = ingresos['totalIngresosMensualesNetos'];
-        delete ingresos['remuneracionMensualCargoPublico'];
-        delete ingresos['ingresoMensualNetoDeclarante'];
-        delete ingresos['totalIngresosMensualesNetos'];
-    }
-    if(tipoDeclaracion === "CONCLUSION"){
-        ingresos['remuneracionConclusionCargoPublico'] = ingresos['remuneracionMensualCargoPublico'];
-        ingresos['ingresoConclusionNetoDeclarante'] = ingresos['ingresoMensualNetoDeclarante'];
-        ingresos['totalIngresosConclusionNetos'] = ingresos['totalIngresosMensualesNetos'];
-        delete ingresos['remuneracionMensualCargoPublico'];
-        delete ingresos['ingresoMensualNetoDeclarante'];
-        delete ingresos['totalIngresosMensualesNetos']; 
-    }
-    return ingresos;
-}
-
-function actividadAnualAnterior(actividadAnualAnterior){
-        actividadAnualAnterior.fechaIngreso = convertirFechaCorta(actividadAnualAnterior.fechaIngreso);
-        actividadAnualAnterior.fechaConclusion = convertirFechaCorta(actividadAnualAnterior.fechaConclusion);
-    return actividadAnualAnterior;
-}
-
-function datosPareja(datosPareja){
-    datosPareja.fechaNacimiento = convertirFechaCorta(datosPareja.fechaNacimiento);
-    datosPareja.ninguno=false;
-    if (datosPareja.actividadLaboralSectorPublico) {
-        datosPareja.actividadLaboralSectorPublico.fechaIngreso = convertirFechaCorta(datosPareja.actividadLaboralSectorPublico.fechaIngreso)
-    }
-    if (datosPareja.actividadLaboralSectorPrivadoOtro) {
-        datosPareja.actividadLaboralSectorPrivadoOtro.fechaIngreso = convertirFechaCorta(datosPareja.actividadLaboralSectorPrivadoOtro.fechaIngreso)
-    }
-    if (datosPareja.domicilioMexico) {
-        if (datosPareja.domicilioMexico.numeroInterior === null) {
-          datosPareja.domicilioMexico.numeroInterior = "";
-        }
+function datosCurricularesDeclarante(datosCurricularesDeclarante) {
+  if (datosCurricularesDeclarante.escolaridad.length >= 1) {
+    datosCurricularesDeclarante.escolaridad.forEach((n) => {
+      if (n.carreraAreaConocimiento === null) {
+        n.carreraAreaConocimiento = "";
       }
-    if (datosPareja.domicilioExtranjero) {
-        if (datosPareja.domicilioExtranjero.numeroInterior === null) {
-            datosPareja.domicilioExtranjero.numeroInterior = "";
-        }
-    }
-    if(datosPareja.actividadLaboralSectorPrivadoOtro){
-       if(datosPareja.actividadLaboralSectorPrivadoOtro.rfc === null){
-          datosPareja.actividadLaboralSectorPrivadoOtro.rfc = "";
-        }
-      }
-    if(datosPareja.rfc === null){
-        datosPareja.rfc = "";
-    }
-    if(datosPareja.curp === null){
-        datosPareja.curp = "";
-    }
-    if(datosPareja.segundoApellido === null){
-        datosPareja.segundoApellido = "";
-    }
-    if (datosPareja.actividadLaboral.clave === 'OTR') {
-        datosPareja.actividadLaboral.clave = 'OTRO'
-    }
-    return datosPareja;
-}
-
-function datosDependientesEconomicos(dependienteEconomico){
-    dependienteEconomico.forEach((n) => {
-        n.fechaNacimiento = convertirFechaCorta(n.fechaNacimiento);
-        if (n.actividadLaboralSectorPublico) {
-            n.actividadLaboralSectorPublico.fechaIngreso = convertirFechaCorta(n.actividadLaboralSectorPublico.fechaIngreso)
-        }
-        if (n.actividadLaboralSectorPrivadoOtro) {
-            n.actividadLaboralSectorPrivadoOtro.fechaIngreso = convertirFechaCorta(n.actividadLaboralSectorPrivadoOtro.fechaIngreso)
-        }
-        if(n.domicilioMexico){
-          if(n.domicilioMexico.numeroInterior === null){
-            n.domicilioMexico.numeroInterior = "";
-          }
-          if(n.domicilioExtranjero === null){
-            n.domicilioExtranjero = "";
-          }
-        }
-        if(n.domicilioExtranjero){
-          if(n.domicilioExtranjero.numeroInterior===null){
-            n.domicilioExtranjero.numeroInterior="";
-          }
-        }
-        if(n.domicilioMexico === null){
-          n.domicilioMexico = "";
-        }
-        if(n.domicilioExtranjero === null){
-          n.domicilioExtranjero = "";
-        }
-        if(n.lugarDondeReside === null){
-          n.lugarDondeReside = "";
-        }
-        if(n.domicilioMexico === null && n.domicilioExtranjero === null){
-          n.lugarDondeReside = "SE DESCONOCE";
-          n.domicilioMexico = "";
-          n.domicilioExtranjero = "";
-        }
-        if(n.actividadLaboralSectorPrivadoOtro != undefined){
-          if(n.actividadLaboralSectorPrivadoOtro.rfc === null){
-            n.actividadLaboralSectorPrivadoOtro.rfc = "";
-          }
-        }
-        if(n.actividadLaboralSectorPublico === null){
-          n.actividadLaboralSectorPublico = "";
-        }
-        if(n.actividadLaboralSectorPrivadoOtro === null){
-          n.actividadLaboralSectorPrivadoOtro = "";
-        }
-        if(n.actividadLaboralSectorPrivadoOtro){
-          if(n.actividadLaboralSectorPrivadoOtro.proveedorContratistaGobierno === null){
-            n.actividadLaboralSectorPrivadoOtro.proveedorContratistaGobierno = "";
-          }
-        }
-        if(n.actividadLaboral.clave === "NIN" && (n.actividadLaboralSectorPublico === null || n.actividadLaboralSectorPrivadoOtro === null)){
-          n.actividadLaboralSectorPublico = "";
-          n.actividadLaboralSectorPrivadoOtro = "";
-        }
-        if(n.segundoApellido === null){
-          n.segundoApellido = "";
-        }
-        if(n.rfc === null){
-          n.rfc = "";
-        }
-        if(n.curp === null){
-          n.curp = "";
-        }
-        return n;
+      n.fechaObtencion = convertirFechaCorta(n.fechaObtencion);
+      return n;
     })
-    return dependienteEconomico;
+  }
+  return datosCurricularesDeclarante;
 }
 
-function bienesInmuebles(bienInmueble){
+function datosEmpleoCargoComision(datosEmpleoCargoComision) {
+  datosEmpleoCargoComision.fechaTomaPosesion = convertirFechaCorta(datosEmpleoCargoComision.fechaTomaPosesion);
+  if (datosEmpleoCargoComision.telefonoOficina.extension === null) {
+    datosEmpleoCargoComision.telefonoOficina.extension = "";
+  }
+  if (datosEmpleoCargoComision.telefonoOficina.telefono === null) {
+    datosEmpleoCargoComision.telefonoOficina.telefono = "";
+  }
+  if (datosEmpleoCargoComision.domicilioMexico) {
+    if (datosEmpleoCargoComision.domicilioMexico.numeroInterior === null) {
+      datosEmpleoCargoComision.domicilioMexico.numeroInterior = "";
+    }
+  }
+  if (datosEmpleoCargoComision.domicilioExtranjero) {
+    if (datosEmpleoCargoComision.domicilioExtranjero.numeroInterior === null) {
+      datosEmpleoCargoComision.domicilioExtranjero.numeroInterior = "";
+    }
+  }
+  return datosEmpleoCargoComision;
+}
+
+function domicilioDeclarante(domicilioDeclarante) {
+  if (domicilioDeclarante.domicilioMexico) {
+    if (domicilioDeclarante.domicilioMexico.numeroInterior === null) {
+      domicilioDeclarante.domicilioMexico.numeroInterior = "";
+    }
+  }
+  if (domicilioDeclarante.domicilioExtranjero) {
+    if (domicilioDeclarante.domicilioExtranjero.numeroInterior === null) {
+      domicilioDeclarante.domicilioExtranjero.numeroInterior = "";
+    }
+  }
+  return domicilioDeclarante;
+}
+
+function experienciaLaboral(experienciaLaboral) {
+  if (experienciaLaboral.experiencia.length >= 1) {
+    var experiencia = experienciaLaboral.experiencia;
+    experiencia.forEach((n) => {
+      n.fechaIngreso = convertirFechaCorta(n.fechaIngreso);
+      n.fechaEgreso = convertirFechaCorta(n.fechaEgreso);
+      if (n.rfc === null) {
+        n.rfc = "";
+      }
+      if (n.ambitoSector.clave === "PRV") {
+        if (n.nivelOrdenGobierno === null) {
+          n.nivelOrdenGobierno = "";
+        }
+        if (n.ambitoPublico === null) {
+          n.ambitoPublico = "";
+        }
+        if (n.nombreEntePublico === null) {
+          n.nombreEntePublico = "";
+        }
+        if (n.areaAdscripcion === null) {
+          n.areaAdscripcion = "";
+        }
+        if (n.empleoCargoComision === null) {
+          n.empleoCargoComision = "";
+        }
+        if (n.funcionPrincipal === null) {
+          n.funcionPrincipal = "";
+        }
+      }
+      if (n.ambitoSector.clave === "PUB") {
+        if (n.nombreEmpresaSociedadAsociacion === null) {
+          n.nombreEmpresaSociedadAsociacion = "";
+        }
+        if (n.area === null) {
+          n.area = "";
+        }
+        if (n.puesto === null) {
+          n.puesto = "";
+        }
+        if (n.sector === null) {
+          n.sector = "";
+        }
+      }
+      if (n.ambitoSector.clave === "OTR") {
+        if (n.nivelOrdenGobierno === null) {
+          n.nivelOrdenGobierno = "";
+        }
+        if (n.ambitoPublico === null) {
+          n.ambitoPublico = "";
+        }
+        if (n.nombreEntePublico === null) {
+          n.nombreEntePublico = "";
+        }
+        if (n.areaAdscripcion === null) {
+          n.areaAdscripcion = "";
+        }
+        if (n.empleoCargoComision === null) {
+          n.empleoCargoComision = "";
+        }
+        if (n.funcionPrincipal === null) {
+          n.funcionPrincipal = "";
+        }
+      }
+      return n;
+    })
+  }
+  return experiencia;
+}
+
+function ingresos(ingresos, tipoDeclaracion) {
+  if (tipoDeclaracion === "MODIFICACION") {
+    ingresos['remuneracionAnualCargoPublico'] = ingresos['remuneracionMensualCargoPublico'];
+    ingresos['ingresoAnualNetoDeclarante'] = ingresos['ingresoMensualNetoDeclarante'];
+    ingresos['totalIngresosAnualesNetos'] = ingresos['totalIngresosMensualesNetos'];
+    delete ingresos['remuneracionMensualCargoPublico'];
+    delete ingresos['ingresoMensualNetoDeclarante'];
+    delete ingresos['totalIngresosMensualesNetos'];
+  }
+  if (tipoDeclaracion === "CONCLUSION") {
+    ingresos['remuneracionConclusionCargoPublico'] = ingresos['remuneracionMensualCargoPublico'];
+    ingresos['ingresoConclusionNetoDeclarante'] = ingresos['ingresoMensualNetoDeclarante'];
+    ingresos['totalIngresosConclusionNetos'] = ingresos['totalIngresosMensualesNetos'];
+    delete ingresos['remuneracionMensualCargoPublico'];
+    delete ingresos['ingresoMensualNetoDeclarante'];
+    delete ingresos['totalIngresosMensualesNetos'];
+  }
+  return ingresos;
+}
+
+function actividadAnualAnterior(actividadAnualAnterior) {
+  actividadAnualAnterior.fechaIngreso = convertirFechaCorta(actividadAnualAnterior.fechaIngreso);
+  actividadAnualAnterior.fechaConclusion = convertirFechaCorta(actividadAnualAnterior.fechaConclusion);
+  return actividadAnualAnterior;
+}
+
+function datosPareja(datosPareja) {
+  datosPareja.fechaNacimiento = convertirFechaCorta(datosPareja.fechaNacimiento);
+  datosPareja.ninguno = false;
+  if (datosPareja.actividadLaboralSectorPublico) {
+    datosPareja.actividadLaboralSectorPublico.fechaIngreso = convertirFechaCorta(datosPareja.actividadLaboralSectorPublico.fechaIngreso)
+  }
+  if (datosPareja.actividadLaboralSectorPrivadoOtro) {
+    datosPareja.actividadLaboralSectorPrivadoOtro.fechaIngreso = convertirFechaCorta(datosPareja.actividadLaboralSectorPrivadoOtro.fechaIngreso)
+  }
+  if (datosPareja.domicilioMexico) {
+    if (datosPareja.domicilioMexico.numeroInterior === null) {
+      datosPareja.domicilioMexico.numeroInterior = "";
+    }
+  }
+  if (datosPareja.domicilioExtranjero) {
+    if (datosPareja.domicilioExtranjero.numeroInterior === null) {
+      datosPareja.domicilioExtranjero.numeroInterior = "";
+    }
+  }
+  if (datosPareja.actividadLaboralSectorPrivadoOtro) {
+    if (datosPareja.actividadLaboralSectorPrivadoOtro.rfc === null) {
+      datosPareja.actividadLaboralSectorPrivadoOtro.rfc = "";
+    }
+  }
+  if (datosPareja.rfc === null) {
+    datosPareja.rfc = "";
+  }
+  if (datosPareja.curp === null) {
+    datosPareja.curp = "";
+  }
+  if (datosPareja.segundoApellido === null) {
+    datosPareja.segundoApellido = "";
+  }
+  if (datosPareja.actividadLaboral.clave === 'OTR') {
+    datosPareja.actividadLaboral.clave = 'OTRO'
+  }
+  return datosPareja;
+}
+
+function datosDependientesEconomicos(dependienteEconomico) {
+  dependienteEconomico.forEach((n) => {
+    n.fechaNacimiento = convertirFechaCorta(n.fechaNacimiento);
+    if (n.actividadLaboralSectorPublico) {
+      n.actividadLaboralSectorPublico.fechaIngreso = convertirFechaCorta(n.actividadLaboralSectorPublico.fechaIngreso)
+    }
+    if (n.actividadLaboralSectorPrivadoOtro) {
+      n.actividadLaboralSectorPrivadoOtro.fechaIngreso = convertirFechaCorta(n.actividadLaboralSectorPrivadoOtro.fechaIngreso)
+    }
+    if (n.domicilioMexico) {
+      if (n.domicilioMexico.numeroInterior === null) {
+        n.domicilioMexico.numeroInterior = "";
+      }
+      if (n.domicilioExtranjero === null) {
+        n.domicilioExtranjero = "";
+      }
+    }
+    if (n.domicilioExtranjero) {
+      if (n.domicilioExtranjero.numeroInterior === null) {
+        n.domicilioExtranjero.numeroInterior = "";
+      }
+    }
+    if (n.domicilioMexico === null) {
+      n.domicilioMexico = "";
+    }
+    if (n.domicilioExtranjero === null) {
+      n.domicilioExtranjero = "";
+    }
+    if (n.lugarDondeReside === null) {
+      n.lugarDondeReside = "";
+    }
+    if (n.domicilioMexico === null && n.domicilioExtranjero === null) {
+      n.lugarDondeReside = "SE DESCONOCE";
+      n.domicilioMexico = "";
+      n.domicilioExtranjero = "";
+    }
+    if (n.actividadLaboralSectorPrivadoOtro != undefined) {
+      if (n.actividadLaboralSectorPrivadoOtro.rfc === null) {
+        n.actividadLaboralSectorPrivadoOtro.rfc = "";
+      }
+    }
+    if (n.actividadLaboralSectorPublico === null) {
+      n.actividadLaboralSectorPublico = "";
+    }
+    if (n.actividadLaboralSectorPrivadoOtro === null) {
+      n.actividadLaboralSectorPrivadoOtro = "";
+    }
+    if (n.actividadLaboralSectorPrivadoOtro) {
+      if (n.actividadLaboralSectorPrivadoOtro.proveedorContratistaGobierno === null) {
+        n.actividadLaboralSectorPrivadoOtro.proveedorContratistaGobierno = "";
+      }
+    }
+    if (n.actividadLaboral.clave === "NIN" && (n.actividadLaboralSectorPublico === null || n.actividadLaboralSectorPrivadoOtro === null)) {
+      n.actividadLaboralSectorPublico = "";
+      n.actividadLaboralSectorPrivadoOtro = "";
+    }
+    if (n.segundoApellido === null) {
+      n.segundoApellido = "";
+    }
+    if (n.rfc === null) {
+      n.rfc = "";
+    }
+    if (n.curp === null) {
+      n.curp = "";
+    }
+    return n;
+  })
+  return dependienteEconomico;
+}
+
+function bienesInmuebles(bienInmueble) {
   bienInmueble.forEach((n) => {
     n.fechaAdquisicion = convertirFechaCorta(n.fechaAdquisicion);
     if (n.superficieConstruccion.unidad === null) {
@@ -297,20 +296,20 @@ function bienesInmuebles(bienInmueble){
     if (n.superficieTerreno.unidad === null) {
       n.superficieTerreno.unidad = 'm2';
     }
-    if(n.domicilioMexico){
+    if (n.domicilioMexico) {
       if (n.domicilioMexico.numeroInterior === null) {
         n.domicilioMexico.numeroInterior = "";
       }
     }
-    if (n.domicilioExtranjero){
-      if(n.domicilioExtranjero.numeroInterior === null) {
+    if (n.domicilioExtranjero) {
+      if (n.domicilioExtranjero.numeroInterior === null) {
         n.domicilioExtranjero.numeroInterior = "";
       }
     }
-    if(n.domicilioExtranjero === null){
+    if (n.domicilioExtranjero === null) {
       delete n.domicilioExtranjero;
     }
-    if(n.domicilioMexico === null){
+    if (n.domicilioMexico === null) {
       delete n.domicilioMexico;
     }
     if (n.tercero[0].tipoPersona === null) {
@@ -318,22 +317,22 @@ function bienesInmuebles(bienInmueble){
     }
     else {
       if (n.tercero[0].nombreRazonSocial === null) {
-         n.tercero[0].nombreRazonSocial = "";
+        n.tercero[0].nombreRazonSocial = "";
       }
       if (n.tercero[0].rfc === null) {
-         n.tercero[0].rfc = "";
+        n.tercero[0].rfc = "";
       }
     }
-    if(n.motivoBaja === null){
+    if (n.motivoBaja === null) {
       delete n.motivoBaja;
     }
-    if(n.formaPago ===  'CREDITO'){
+    if (n.formaPago === 'CREDITO') {
       n.formaPago = 'CRÉDITO';
     }
-    if(n.formaPago ===  'NO_APLICA'){
+    if (n.formaPago === 'NO_APLICA') {
       n.formaPago = 'NO APLICA';
     }
-    if(n.valorConformeA ===  'ESCRITURA_PUBLICA'){
+    if (n.valorConformeA === 'ESCRITURA_PUBLICA') {
       n.valorConformeA = 'ESCRITURA PÚBLICA';
     }
     n.superficieTerreno.valor = Math.floor(n.superficieTerreno.valor);
@@ -343,7 +342,7 @@ function bienesInmuebles(bienInmueble){
   return bienInmueble;
 }
 
-function vehiculos(vehiculo){
+function vehiculos(vehiculo) {
   vehiculo.forEach((n) => {
     n.fechaAdquisicion = convertirFechaCorta(n.fechaAdquisicion);
     if (n.tercero[0].tipoPersona === null) {
@@ -351,13 +350,13 @@ function vehiculos(vehiculo){
     }
     else {
       if (n.tercero[0].nombreRazonSocial === null) {
-         n.tercero[0].nombreRazonSocial = "";
+        n.tercero[0].nombreRazonSocial = "";
       }
       if (n.tercero[0].rfc === null) {
-         n.tercero[0].rfc = "";
+        n.tercero[0].rfc = "";
       }
     }
-    if(n.lugarRegistro.pais === null || !n.lugarRegistro.pais){
+    if (n.lugarRegistro.pais === null || !n.lugarRegistro.pais) {
       n.lugarRegistro.pais = "MX";
     }
     if (n.lugarRegistro.entidadFederativa === null) {
@@ -366,13 +365,13 @@ function vehiculos(vehiculo){
     if (n.lugarRegistro.pais != 'MX') {
       delete n.lugarRegistro.entidadFederativa;
     }
-    if(n.motivoBaja === null){
+    if (n.motivoBaja === null) {
       delete n.motivoBaja;
     }
-    if(n.formaPago ===  'CREDITO'){
+    if (n.formaPago === 'CREDITO') {
       n.formaPago = 'CRÉDITO';
     }
-    if(n.formaPago ===  'NO_APLICA'){
+    if (n.formaPago === 'NO_APLICA') {
       n.formaPago = 'NO APLICA';
     }
     return n;
@@ -380,7 +379,7 @@ function vehiculos(vehiculo){
   return vehiculo;
 }
 
-function bienesMuebles(bienMueble){ 
+function bienesMuebles(bienMueble) {
   bienMueble.forEach((n) => {
     n.fechaAdquisicion = convertirFechaCorta(n.fechaAdquisicion);
     if (n.tercero[0].tipoPersona === null) {
@@ -388,19 +387,19 @@ function bienesMuebles(bienMueble){
     }
     else {
       if (n.tercero[0].nombreRazonSocial === null) {
-         n.tercero[0].nombreRazonSocial = "";
+        n.tercero[0].nombreRazonSocial = "";
       }
       if (n.tercero[0].rfc === null) {
-         n.tercero[0].rfc = "";
+        n.tercero[0].rfc = "";
       }
     }
-    if(n.motivoBaja === null){
+    if (n.motivoBaja === null) {
       delete n.motivoBaja;
     }
-    if(n.formaPago ===  'CREDITO'){
+    if (n.formaPago === 'CREDITO') {
       n.formaPago = 'CRÉDITO';
     }
-    if(n.formaPago ===  'NO_APLICA'){
+    if (n.formaPago === 'NO_APLICA') {
       n.formaPago = 'NO APLICA';
     }
     return n;
@@ -408,7 +407,7 @@ function bienesMuebles(bienMueble){
   return bienMueble;
 }
 
-function adeudosPasivos(adeudo){
+function adeudosPasivos(adeudo) {
   adeudo.forEach((n) => {
     n.fechaAdquisicion = convertirFechaCorta(n.fechaAdquisicion);
     if (n.tercero[0].tipoPersona === null) {
@@ -416,28 +415,28 @@ function adeudosPasivos(adeudo){
     }
     else {
       if (n.tercero[0].nombreRazonSocial === null) {
-         n.tercero[0].nombreRazonSocial = "";
+        n.tercero[0].nombreRazonSocial = "";
       }
       if (n.tercero[0].rfc === null) {
-         n.tercero[0].rfc = "";
+        n.tercero[0].rfc = "";
       }
     }
-    if(n.montoOriginal){
-      if(n.montoOriginal.moneda === null){
+    if (n.montoOriginal) {
+      if (n.montoOriginal.moneda === null) {
         n.montoOriginal.moneda = "MXN";
       }
     }
-    if(n.saldoInsolutoSituacionActual){
-      if(n.saldoInsolutoSituacionActual.moneda === null){
+    if (n.saldoInsolutoSituacionActual) {
+      if (n.saldoInsolutoSituacionActual.moneda === null) {
         n.saldoInsolutoSituacionActual.moneda = "MXN";
       }
     }
-    if(n.localizacionAdeudo){
-      if(n.localizacionAdeudo.pais === null){
+    if (n.localizacionAdeudo) {
+      if (n.localizacionAdeudo.pais === null) {
         n.localizacionAdeudo.pais = "MX";
       }
     }
-    if(n.motivoBaja === null){
+    if (n.motivoBaja === null) {
       delete n.motivoBaja;
     }
     return n;
@@ -445,16 +444,16 @@ function adeudosPasivos(adeudo){
   return adeudo;
 }
 
-function inversionesCuentasValores(inversion){
+function inversionesCuentasValores(inversion) {
   inversion.forEach((n) => {
-    if(n.localizacionInversion){
-      if(n.localizacionInversion.institucionRazonSocial === null){
+    if (n.localizacionInversion) {
+      if (n.localizacionInversion.institucionRazonSocial === null) {
         n.localizacionAdeudo.institucionRazonSocial = "";
       }
-      if(n.localizacionInversion.rfc === null){
+      if (n.localizacionInversion.rfc === null) {
         n.localizacionInversion.rfc = "";
       }
-      if(n.localizacionInversion.pais === null){
+      if (n.localizacionInversion.pais === null) {
         n.localizacionInversion.pais = "MX";
       }
     }
@@ -463,17 +462,17 @@ function inversionesCuentasValores(inversion){
     }
     else {
       if (n.tercero[0].nombreRazonSocial === null) {
-         n.tercero[0].nombreRazonSocial = "";
+        n.tercero[0].nombreRazonSocial = "";
       }
       if (n.tercero[0].rfc === null) {
-         n.tercero[0].rfc = "";
+        n.tercero[0].rfc = "";
       }
     }
-    if(n.motivoBaja === null){
+    if (n.motivoBaja === null) {
       delete n.motivoBaja;
     }
-    if(n.saldoSituacionActual){
-      if(n.saldoSituacionActual.moneda === null){
+    if (n.saldoSituacionActual) {
+      if (n.saldoSituacionActual.moneda === null) {
         n.saldoSituacionActual = "MXN";
       }
     }
@@ -482,29 +481,29 @@ function inversionesCuentasValores(inversion){
   return inversion;
 }
 
-function prestamoComodato(prestamo){
+function prestamoComodato(prestamo) {
   prestamo.forEach((n) => {
-    if(n.tipoBien){
-      if(n.tipoBien.inmueble === null){
+    if (n.tipoBien) {
+      if (n.tipoBien.inmueble === null) {
         delete n.tipoBien.inmueble;
       }
-      if(n.tipoBien.inmueble){
-        if(n.tipoBien.inmueble.domicilioMexico){
-          if(n.tipoBien.inmueble.domicilioMexico.numeroInterior === null){
+      if (n.tipoBien.inmueble) {
+        if (n.tipoBien.inmueble.domicilioMexico) {
+          if (n.tipoBien.inmueble.domicilioMexico.numeroInterior === null) {
             n.tipoBien.inmueble.domicilioMexico.numeroInterior = "";
           }
         }
-        if(n.tipoBien.inmueble.domicilioExtranjero){
-          if(n.tipoBien.inmueble.domicilioExtranjero.numeroInterior === null){
+        if (n.tipoBien.inmueble.domicilioExtranjero) {
+          if (n.tipoBien.inmueble.domicilioExtranjero.numeroInterior === null) {
             n.tipoBien.inmueble.domicilioExtranjero.numeroInterior = "";
           }
         }
       }
       if (n.tipoBien.vehiculo) {
-        if (n.tipoBien.vehiculo === null){
+        if (n.tipoBien.vehiculo === null) {
           delete n.tipoBien.vehiculo;
         }
-        if (n.tipoBien.vehiculo.lugarRegistro.pais === null){
+        if (n.tipoBien.vehiculo.lugarRegistro.pais === null) {
           n.tipoBien.vehiculo.lugarRegistro.pais = 'MX';
         }
         if (n.tipoBien.vehiculo.lugarRegistro.pais != 'MX') {
@@ -517,25 +516,25 @@ function prestamoComodato(prestamo){
   return prestamo;
 }
 
-function participacion(participacion){
-  participacion.forEach((n)=>{
-    if(n.tipoOperacion === null){
+function participacion(participacion) {
+  participacion.forEach((n) => {
+    if (n.tipoOperacion === null) {
       delete n.tipoOperacion;
     }
-    if(n.recibeRemuneracion === false){
+    if (n.recibeRemuneracion === false) {
       delete n.montoMensual;
     }
-    if(n.montoMensual){
-      if(n.montoMensual.moneda === null){
+    if (n.montoMensual) {
+      if (n.montoMensual.moneda === null) {
         n.montoMensual.moneda = "MXN";
       }
     }
-    if(n.ubicacion){
-      if(n.ubicacion.pais === null){
+    if (n.ubicacion) {
+      if (n.ubicacion.pais === null) {
         n.ubicacion.pais = "MX";
       }
     }
-    if(n.porcentajeParticipacion === 0){
+    if (n.porcentajeParticipacion === 0) {
       n.porcentajeParticipacion = 1;
     }
     return n;
@@ -543,22 +542,22 @@ function participacion(participacion){
   return participacion;
 }
 
-function tomaDeciciones(tomaDecision){
+function tomaDeciciones(tomaDecision) {
   tomaDecision.forEach((n) => {
     n.fechaInicioParticipacion = convertirFechaCorta(n.fechaInicioParticipacion);
-    if(n.tipoOperacion === null){
+    if (n.tipoOperacion === null) {
       n.tipoOperacion = "AGREGAR";
     }
-    if(n.recibeRemuneracion === false){
+    if (n.recibeRemuneracion === false) {
       delete n.montoMensual;
     }
-    if(n.montoMensual){
-      if(n.montoMensual.moneda === null){
+    if (n.montoMensual) {
+      if (n.montoMensual.moneda === null) {
         n.montoMensual.moneda = "MXN";
       }
     }
-    if(n.ubicacion){
-      if(n.ubicacion.pais === null){
+    if (n.ubicacion) {
+      if (n.ubicacion.pais === null) {
         n.ubicacion.pais = "MX";
       }
     }
@@ -567,9 +566,9 @@ function tomaDeciciones(tomaDecision){
   return tomaDecision;
 }
 
-function apoyos(apoyo){
+function apoyos(apoyo) {
   apoyo.forEach((n) => {
-    if(n.montoApoyoMensual){
+    if (n.montoApoyoMensual) {
       if (n.montoApoyoMensual.moneda === null) {
         n.montoApoyoMensual.moneda = 'MXN';
       }
@@ -579,28 +578,28 @@ function apoyos(apoyo){
   return apoyo;
 }
 
-function representaciones(representacion){
+function representaciones(representacion) {
   representacion.forEach((n) => {
     n.fechaInicioRepresentacion = convertirFechaCorta(n.fechaInicioRepresentacion);
-    if(n.tipoOperacion === null){
+    if (n.tipoOperacion === null) {
       n.tipoOperacion = "AGREGAR";
     }
-    if(n.recibeRemuneracion === false){
-      if(n.montoMensual === null){
+    if (n.recibeRemuneracion === false) {
+      if (n.montoMensual === null) {
         delete n.montoMensual;
       }
     }
-    if(n.montoMensual){
-      if(n.montoMensual.moneda === null){
+    if (n.montoMensual) {
+      if (n.montoMensual.moneda === null) {
         n.montoMensual.moneda = "MXN"
       }
     }
-    if(n.ubicacion){
-      if(n.ubicacion.pais === null){
+    if (n.ubicacion) {
+      if (n.ubicacion.pais === null) {
         n.ubicacion.pais = "MX";
       }
     }
-    if(n.rfc === null){
+    if (n.rfc === null) {
       n.rfc = "";
     }
     return n;
@@ -608,26 +607,26 @@ function representaciones(representacion){
   return representacion;
 }
 
-function clientesPrincipales(cliente){
+function clientesPrincipales(cliente) {
   cliente.forEach((n) => {
-    if(n.empresa.rfc === null){
+    if (n.empresa.rfc === null) {
       n.empresa.rfc = "";
     }
-    if(n.ubicacion){
-      if(n.ubicacion.pais === null){
+    if (n.ubicacion) {
+      if (n.ubicacion.pais === null) {
         n.ubicacion.pais = "MX";
       }
-      if(n.ubicacion.entidadFederativa === null){
+      if (n.ubicacion.entidadFederativa === null) {
         n.ubicacion.entidadFederativa = "";
       }
-      if(n.ubicacion.pais !== 'MX'){
+      if (n.ubicacion.pais !== 'MX') {
         delete n.ubicacion.entidadFederativa;
       }
     }
-    if(n.clientePrincipal === null){
+    if (n.clientePrincipal === null) {
       n.clientePrincipal = "";
     }
-    if(n.montoAproximadoGanancia.moneda === null){
+    if (n.montoAproximadoGanancia.moneda === null) {
       n.montoAproximadoGanancia.moneda = "MXN";
     }
     return n;
@@ -635,23 +634,23 @@ function clientesPrincipales(cliente){
   return cliente;
 }
 
-function beneficiosPrivados(beneficio){
+function beneficiosPrivados(beneficio) {
   beneficio.forEach((n) => {
-    if(n.otorgante){
+    if (n.otorgante) {
       if (n.otorgante.tipoPersona === null) {
         delete n.otorgante;
       }
       else {
         if (n.otorgante.nombreRazonSocial === null) {
-           n.otorgante.nombreRazonSocial = "";
+          n.otorgante.nombreRazonSocial = "";
         }
         if (n.otorgante.rfc === null) {
-           n.otorgante.rfc = "";
+          n.otorgante.rfc = "";
         }
       }
     }
-    if(n.montoMensualAproximado){
-      if(n.montoMensualAproximado.moneda === null){
+    if (n.montoMensualAproximado) {
+      if (n.montoMensualAproximado.moneda === null) {
         n.montoMensualAproximado.moneda = "MXN";
       }
     }
@@ -660,24 +659,24 @@ function beneficiosPrivados(beneficio){
   return beneficio;
 }
 
-function fideicomisos(fideicomiso){
+function fideicomisos(fideicomiso) {
   fideicomiso.forEach((n) => {
-    if(n.rfcFideicomiso === null){
+    if (n.rfcFideicomiso === null) {
       n.rfcFideicomiso = "";
     }
-    if(n.fideicomitente.rfc === null){
+    if (n.fideicomitente.rfc === null) {
       n.fideicomitente.rfc = "";
     }
-    if(n.extranjero === null){
+    if (n.extranjero === null) {
       n.extranjero = "MX";
     }
-    if(n.fideicomitente === null){
+    if (n.fideicomitente === null) {
       n.fideicomitente = "";
     }
-    if(n.fiduciario === null){
+    if (n.fiduciario === null) {
       n.fiduciario = "";
     }
-    if(n.fideicomisario === null){
+    if (n.fideicomisario === null) {
       n.fideicomisario = "";
     }
     return n;
@@ -686,27 +685,27 @@ function fideicomisos(fideicomiso){
 }
 
 module.exports = {
-    convertirFechaLarga,
-    datosGenerales,
-    datosCurricularesDeclarante,
-    datosEmpleoCargoComision,
-    domicilioDeclarante,
-    experienciaLaboral,
-    ingresos,
-    actividadAnualAnterior,
-    datosPareja,
-    datosDependientesEconomicos,
-    bienesInmuebles,
-    vehiculos,
-    bienesMuebles,
-    adeudosPasivos,
-    inversionesCuentasValores,
-    prestamoComodato,
-    participacion,
-    tomaDeciciones,
-    apoyos,
-    representaciones,
-    clientesPrincipales,
-    beneficiosPrivados,
-    fideicomisos
+  convertirFechaLarga,
+  datosGenerales,
+  datosCurricularesDeclarante,
+  datosEmpleoCargoComision,
+  domicilioDeclarante,
+  experienciaLaboral,
+  ingresos,
+  actividadAnualAnterior,
+  datosPareja,
+  datosDependientesEconomicos,
+  bienesInmuebles,
+  vehiculos,
+  bienesMuebles,
+  adeudosPasivos,
+  inversionesCuentasValores,
+  prestamoComodato,
+  participacion,
+  tomaDeciciones,
+  apoyos,
+  representaciones,
+  clientesPrincipales,
+  beneficiosPrivados,
+  fideicomisos
 };
