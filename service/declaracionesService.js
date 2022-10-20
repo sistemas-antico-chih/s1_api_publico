@@ -927,6 +927,7 @@ async function post_declaraciones(body) {
               }
             },
             "interes": {
+              actualizacionConflictoInteres: false,
               participacion: {
                 ninguno: ningunoParticipacion,
                 participacion: participacion1
