@@ -1,7 +1,7 @@
 FROM node:12
 
-ADD . /piloto_s1
-WORKDIR /piloto_s1
+ADD . /piloto_s1_des
+WORKDIR /piloto_s1_des
 
 
 RUN yarn add global yarn \

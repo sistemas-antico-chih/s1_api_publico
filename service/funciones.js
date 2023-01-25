@@ -665,8 +665,10 @@ function fideicomisos(fideicomiso){
     if(n.rfcFideicomiso === null){
       n.rfcFideicomiso = "";
     }
-    if(n.fideicomitente.rfc === null){
-      n.fideicomitente.rfc = "";
+    if(n.fideicomitente){
+      if(n.fideicomitente.rfc === null){
+        n.fideicomitente.rfc = "";
+      }
     }
     if(n.extranjero === null){
       n.extranjero = "MX";
