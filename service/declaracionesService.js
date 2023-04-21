@@ -58,6 +58,7 @@ async function post_declaraciones(body) {
     '__v': 0,
     'createdAt': 0,
     'datosGenerales._id': 0,
+    'datosGenerales.hasNull': 0,
     'datosGenerales.rfc._id':0,
     'datosGenerales.correoElectronico._id': 0,
     'datosGenerales.telefono._id': 0,
@@ -198,7 +199,6 @@ async function post_declaraciones(body) {
     'bienesMuebles.bienMueble.formaAdquisicion._id': 0,
     'bienesMuebles.bienMueble.valorAdquisicion._id': 0,
     'bienesMuebles.bienMueble.motivoBaja._id': 0,
-    'inversiones._id': 0,
     'inversionesCuentasValores._id': 0,
     'inversionesCuentasValores.inversion._id': 0,
     'inversionesCuentasValores.inversion.tipoInversion._id': 0,
@@ -207,13 +207,6 @@ async function post_declaraciones(body) {
     'inversionesCuentasValores.inversion.tercero._id': 0,
     'inversionesCuentasValores.inversion.localizacionInversion._id': 0,
     'inversionesCuentasValores.inversion.saldoSituacionActual._id': 0,
-    'inversiones.inversion._id': 0,
-    'inversiones.inversion.tipoInversion._id': 0,
-    'inversiones.inversion.subTipoInversion._id': 0,
-    'inversiones.inversion.titular._id': 0,
-    'inversiones.inversion.tercero._id': 0,
-    'inversiones.inversion.localizacionInversion._id': 0,
-    'inversiones.inversion.saldoSituacionActual._id': 0,
     'adeudosPasivos._id': 0,
     'adeudosPasivos.adeudo._id': 0,
     'adeudosPasivos.adeudo.titular._id': 0,
@@ -298,7 +291,7 @@ async function post_declaraciones(body) {
         newSort["datosGenerales.primerApellido"] = value
       }
       if (key === "segundoApellido") {
-        newSort["datosGenerales.segundoApellido"] = value
+          newSort={"datosGenerales.segundoApellido":value}      
       }
       if (key === "escolaridadNivel") {
         newSort["datosCurricularesDeclarante.escolaridad.nivel.clave"] = value
@@ -926,6 +919,7 @@ async function post_declaraciones(body) {
               }
             },
             "interes": {
+              actualizacionConflictoInteres: false,
               participacion: {
                 ninguno: ningunoParticipacion,
                 participacion: participacion1
@@ -994,7 +988,6 @@ async function post_declaraciones(body) {
       } catch (e) {
         console.log(e);
       }
-
       console.log(newSort);
       console.log(newQuery);
 
