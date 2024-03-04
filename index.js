@@ -53,7 +53,7 @@ let spic = '/v2/declaraciones';
 swaggerDoc.paths[spic].post.security.push({ BearerAuth: [] });
 // console.log(swaggerDoc.paths[spic].post.security);
 
-swaggerDoc.paths[dependencias].get.security.push({ BearerAuth: [] });
+swaggerDoc.paths[spic].get.security.push({ BearerAuth: [] });
 // console.log(swaggerDoc.paths[dependencias].get.security);
 
 console.log();
