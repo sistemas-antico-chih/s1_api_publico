@@ -1,14 +1,12 @@
 const { Schema, model } = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
-const { datosCurricularesDeclarante } = require('../service/funciones');
-var declaracion_schema  = mongoose.model('declaracion_schema', declaracionesSchema);
-var user_schema  = mongoose.model('user_schema', userSchema);
+//const { datosCurricularesDeclarante } = require('../service/funciones');
 
 const declaracionesSchema = new Schema({
     declaracionCompleta: Boolean,
     firmada: Boolean,
     tipoDeclaracion: String,
-    owner: { type: Schema.Types.ObjectId, ref: 'declaracion_schema' },
+    owner: { type: Schema.Types.ObjectId, ref: 'user_schema' },
     createdAt: Date,
     updatedAt: Date,
     anioEjercicio: Number,
@@ -316,6 +314,9 @@ const userSchema = new Schema({
 })
 
 declaracionesSchema.plugin(mongoosePaginate);
+
+const declaracion_schema  = mongoose.model('declaracion_schema', declaracionesSchema);
+const user_schema  = mongoose.model('user_schema', userSchema);
 
 //model('base de datos', 'esquema', 'coleccion')
 //para este manual se está apuntando a la coleccion 'declaraciones' de la base de datos 'declaraciones'
