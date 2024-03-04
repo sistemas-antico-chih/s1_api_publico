@@ -1,22 +1,3 @@
-'use strict';
-const http = require('http');
-const express = require('express');
-const bodyParser = require('body-parser');
-
-const swaggerUi = require('swagger-ui-express');
-const swaggerValidation = require('openapi-validator-middleware');
-const mongoose = require('mongoose');
-
-const Ajv = require('ajv');
-
-const localize = require('ajv-i18n');
-
-const jsyaml = require('js-yaml');
-const fs = require('fs');
-const { post_declaraciones } = require('./controllers/Declaraciones');
-
-//require('dotenv').config({ path: './utils/.env' });
-
 /************ Mongo DB ******************/
 /************ Mongo DB ******************/
 const url = `mongodb://${process.env.USERMONGO}:${process.env.PASSWORDMONGO}@${process.env.HOSTMONGO}/${process.env
@@ -29,15 +10,15 @@ const db = mongoose
 /************ Mongo DB ******************/
 /************ Mongo DB ******************/
 
-//const standar = 'api/openapi.yaml';
-//const spec = fs.readFileSync(standar, 'utf8');
-//const swaggerDoc = jsyaml.safeLoad(spec);
+const standar = 'api/openapi.yaml';
+const spec = fs.readFileSync(standar, 'utf8');
+const swaggerDoc = jsyaml.safeLoad(spec);
 
 const serverPort = 8080;
 
-//let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
+let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
 
-/*swaggerDoc.components.securitySchemes = {
+swaggerDoc.components.securitySchemes = {
 	spic_auth,
 	BearerAuth: {
 		type: 'http',
@@ -45,22 +26,20 @@ const serverPort = 8080;
 		bearerFormat: 'JWT'
 	}
 };
-*/
-
 
 // console.log(swaggerDoc.components.securitySchemes);
 
 let spic = '/v1/spic';
 let dependencias = '/v1/spic/dependencias';
-//swaggerDoc.paths[spic].post.security.push({ BearerAuth: [] });
+swaggerDoc.paths[spic].post.security.push({ BearerAuth: [] });
 // console.log(swaggerDoc.paths[spic].post.security);
 
-//swaggerDoc.paths[dependencias].get.security.push({ BearerAuth: [] });
+swaggerDoc.paths[dependencias].get.security.push({ BearerAuth: [] });
 // console.log(swaggerDoc.paths[dependencias].get.security);
 
 console.log();
 
-//swaggerValidation.init(swaggerDoc);
+swaggerValidation.init(swaggerDoc);
 const app = express();
 app.use(bodyParser.json());
 
@@ -82,11 +61,11 @@ app.use((req, res, next) => {
 	next();
 });
 
-//app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 //app.post('/v1/spic', swaggerValidation.validate, post_spic);
 //app.get('/v1/spic/dependencias', swaggerValidation.validate, get_dependencias);
-app.post('/v2/declaraciones', swaggerValidation.validate, post_declaraciones);
+app.get('/v2/declaraciones', swaggerValidation.validate, post_declaraciones);
 
 app.get('/getVersion', async (req,res, next) => {
 	res.json({
