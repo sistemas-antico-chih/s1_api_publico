@@ -29,13 +29,13 @@ const db = mongoose
 /************ Mongo DB ******************/
 /************ Mongo DB ******************/
 
-//const standar = 'api/openapi.yaml';
-//const spec = fs.readFileSync(standar, 'utf8');
-//const swaggerDoc = jsyaml.safeLoad(spec);
+const standar = 'api/openapi.yaml';
+const spec = fs.readFileSync(standar, 'utf8');
+const swaggerDoc = jsyaml.safeLoad(spec);
 
 const serverPort = 8080;
 
-/*let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
+let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
 
 swaggerDoc.components.securitySchemes = {
 	spic_auth,
@@ -45,17 +45,15 @@ swaggerDoc.components.securitySchemes = {
 		bearerFormat: 'JWT'
 	}
 };
-*/
 
 // console.log(swaggerDoc.components.securitySchemes);
 
 let spic = '/v1/spic';
 let dependencias = '/v1/spic/dependencias';
-let declaraciones = '/v2/declaraciones';
-//swaggerDoc.paths[spic].post.security.push({ BearerAuth: [] });
+swaggerDoc.paths[spic].post.security.push({ BearerAuth: [] });
 // console.log(swaggerDoc.paths[spic].post.security);
 
-//swaggerDoc.paths[dependencias].get.security.push({ BearerAuth: [] });
+swaggerDoc.paths[dependencias].get.security.push({ BearerAuth: [] });
 // console.log(swaggerDoc.paths[dependencias].get.security);
 
 console.log();
@@ -76,15 +74,24 @@ app.use((req, res, next) => {
 		let errores = validate.errors.map(({ message, dataPath }) => `${dataPath.slice(1)}: ${message}`);
 
 		res.statusCode = 400;
-		next({ status: 400, errores });
+		next({ status: 400, errores: errores.join(' | ') });
 		return;
 	}
 	next();
 });
 
-//app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+
+app.post('/v1/spic', swaggerValidation.validate, post_spic);
+app.get('/v1/spic/dependencias', swaggerValidation.validate, get_dependencias);
 app.post('/v2/declaraciones', swaggerValidation.validate, post_declaraciones);
 
+app.get('/getVersion', async (req,res, next) => {
+	res.json({
+		'version':'desarrollo - 20/04/2022'
+	});
+})
+;
 app.use((err, req, res, next) => {
 	res.status(err.status || 500).json({
 		code: err.status || 500,
