@@ -17,18 +17,6 @@ const { post_declaraciones } = require('./controllers/Declaraciones');
 
 //require('dotenv').config({ path: './utils/.env' });
 
-/************ Mongo DB ******************/
-/************ Mongo DB ******************/
-const url = `mongodb://${process.env.USERMONGO}:${process.env.PASSWORDMONGO}@${process.env.HOSTMONGO}/${process.env
-	.DATABASE}`;
-
-const db = mongoose
-	.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
-	.then(() => console.log('Conexión a base de datos MongoDB...\t\t(Exitosa!!!)'))
-	.catch((err) => console.log(`Conexión a base de datos MongoDB...\t\t(${err})`));
-/************ Mongo DB ******************/
-/************ Mongo DB ******************/
-
 const url = `mongodb://${process.env.USERMONGO}:${process.env.PASSWORDMONGO}@${process.env.HOSTMONGO}/${process.env
 	.DATABASE}`;
 
