@@ -52,7 +52,7 @@ const serverPort = 8080;
 
 let spic = '/v1/spic';
 let dependencias = '/v1/spic/dependencias';
-swaggerDoc.paths[spic].post.security.push({ BearerAuth: [] });
+//swaggerDoc.paths[spic].post.security.push({ BearerAuth: [] });
 // console.log(swaggerDoc.paths[spic].post.security);
 
 swaggerDoc.paths[dependencias].get.security.push({ BearerAuth: [] });
