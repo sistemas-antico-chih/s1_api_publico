@@ -6,7 +6,7 @@ const declaracionesSchema = new Schema({
     declaracionCompleta: Boolean,
     firmada: Boolean,
     tipoDeclaracion: String,
-    owner: { type: Schema.Types.ObjectId, ref: 'user_schema' },
+    owner: { type: Schema.Types.ObjectId, ref: 'User' },
     createdAt: Date,
     updatedAt: Date,
     anioEjercicio: Number,
@@ -315,15 +315,15 @@ const userSchema = new Schema({
 
 declaracionesSchema.plugin(mongoosePaginate);
 
-const declaracion_schema  = mongoose.model('declaracion_schema', declaracionesSchema);
-const user_schema  = mongoose.model('user_schema', userSchema);
-
 //model('base de datos', 'esquema', 'coleccion')
 //para este manual se está apuntando a la coleccion 'declaraciones' de la base de datos 'declaraciones'
 //el usuari puede cambiar el nombre de la coleccion o de la base de datos.
 let Declaraciones = model('declaraciones', declaracionesSchema, 'declaraciones');
+let User = model('user', userSchema,'user');
 
 module.exports = {
     declaracionesSchema,
-    Declaraciones
+    Declaraciones,
+    userSchema,
+    User
 };
