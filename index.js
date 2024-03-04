@@ -60,7 +60,7 @@ let dependencias = '/v1/spic/dependencias';
 
 console.log();
 
-swaggerValidation.init(swaggerDoc);
+//swaggerValidation.init(swaggerDoc);
 const app = express();
 app.use(bodyParser.json());
 
