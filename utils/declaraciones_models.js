@@ -315,8 +315,8 @@ const userSchema = new Schema({
 
 declaracionesSchema.plugin(mongoosePaginate);
 
-const declaracion_schema  = Schema.model('declaracion_schema', declaracionesSchema);
-const user_schema  = Schema.model('user_schema', userSchema);
+const declaracion_schema  = mongoose.model('declaracion_schema', declaracionesSchema);
+const user_schema  = mongoose.model('user_schema', userSchema);
 
 //model('base de datos', 'esquema', 'coleccion')
 //para este manual se está apuntando a la coleccion 'declaraciones' de la base de datos 'declaraciones'
