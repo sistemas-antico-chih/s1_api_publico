@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
-//const { datosCurricularesDeclarante } = require('../service/funciones');
 
 const declaracionesSchema = new Schema({
     declaracionCompleta: Boolean,
@@ -315,9 +314,9 @@ const userSchema = new Schema({
 
 declaracionesSchema.plugin(mongoosePaginate);
 
-//model('base de datos', 'esquema', 'coleccion')
-//para este manual se está apuntando a la coleccion 'declaraciones' de la base de datos 'declaraciones'
-//el usuari puede cambiar el nombre de la coleccion o de la base de datos.
+//Para este manual se está apuntando a la coleccion 'declaraciones' de la base de datos 'declaraciones'
+//el usuario puede cambiar el nombre de la coleccion o de la base de datos.
+//model('base de datos', esquema, 'coleccion')
 let Declaraciones = model('declaraciones', declaracionesSchema, 'declaraciones');
 let User = model('user', userSchema,'user');
 
