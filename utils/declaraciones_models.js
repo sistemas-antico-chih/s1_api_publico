@@ -1,11 +1,14 @@
 const { Schema, model } = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
+const { datosCurricularesDeclarante } = require('../service/funciones');
+var declaracion_schema  = mongoose.model('declaracion_schema', declaracionesSchema);
+var user_schema  = mongoose.model('user_schema', userSchema);
 
 const declaracionesSchema = new Schema({
     declaracionCompleta: Boolean,
     firmada: Boolean,
     tipoDeclaracion: String,
-    owner: this.declaracionesSchema.Schema.Types.ObjectId,
+    owner: { type: Schema.Types.ObjectId, ref: 'declaracion_schema' },
     createdAt: Date,
     updatedAt: Date,
     anioEjercicio: Number,
@@ -297,6 +300,20 @@ const declaracionesSchema = new Schema({
         aclaracionesObservaciones: String
     }
 }, { collation: { locale: 'es', strength: 4 } });
+
+const userSchema = new Schema({
+    roles: { type: [], default: void 0 },
+    declaraciones: { type: [], default: void 0 },
+    username: String,
+    password: password,
+    nombre: String,
+    primerApellido: String,
+    segundoApellido: String,
+    curp: String,
+    rfc: String,
+    createdAt: Date,
+    updatedAt: Date
+})
 
 declaracionesSchema.plugin(mongoosePaginate);
 
