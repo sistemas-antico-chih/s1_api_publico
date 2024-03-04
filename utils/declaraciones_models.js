@@ -303,7 +303,7 @@ const userSchema = new Schema({
     roles: { type: [], default: void 0 },
     declaraciones: { type: [], default: void 0 },
     username: String,
-    password: password,
+    password: String,
     nombre: String,
     primerApellido: String,
     segundoApellido: String,
