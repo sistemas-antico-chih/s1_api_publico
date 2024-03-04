@@ -1,3 +1,22 @@
+'use strict';
+const http = require('http');
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerValidation = require('openapi-validator-middleware');
+const mongoose = require('mongoose');
+
+const Ajv = require('ajv');
+
+const localize = require('ajv-i18n');
+
+const jsyaml = require('js-yaml');
+const fs = require('fs');
+const { post_declaraciones } = require('./controllers/Declaraciones');
+
+//require('dotenv').config({ path: './utils/.env' });
+
 /************ Mongo DB ******************/
 /************ Mongo DB ******************/
 const url = `mongodb://${process.env.USERMONGO}:${process.env.PASSWORDMONGO}@${process.env.HOSTMONGO}/${process.env
