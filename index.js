@@ -35,7 +35,7 @@ const db = mongoose
 
 const serverPort = 8080;
 
-let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
+//let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
 
 swaggerDoc.components.securitySchemes = {
 	spic_auth,
