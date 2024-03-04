@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
-const { datosCurricularesDeclarante } = require('../service/funciones');
+//const { datosCurricularesDeclarante } = require('../service/funciones');
 
 const declaracionesSchema = new Schema({
     declaracionCompleta: Boolean,
