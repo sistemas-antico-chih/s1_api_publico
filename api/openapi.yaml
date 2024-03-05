@@ -184,4 +184,65 @@ components:
               description: >-
                 RFC de la persona quien hace la consulta.
               example: GOAP780710RH7
-    
+    respSpic:
+      type: array
+      items:
+        type: object
+        required:
+          - id
+          - nombres
+          - fechaCaptura
+          - primerApellido
+          - tipoProcedimiento
+          - institucionDependencia
+          - puesto
+        properties:
+          id:
+            type: string
+            description: Dato que permita identificar de manera  unívoca al registro
+            example: RFT129
+          fechaCaptura:
+            type: string
+            format: date-time
+            description: >-
+              Fecha y hora en la que se agrega o modifca el registro. Fecha
+              en formato ISO 8601
+            example: '2019-01-21T17:32:28Z'
+          ejercicioFiscal:
+            type: string
+            description: Ejercicio fiscal
+            example: '2018'
+          rfc:
+            type: string
+            description: RFC del Servidor Público con homoclave
+            example: JPM851111C44
+          curp:
+            type: string
+            description: CURP del Servidor Público
+            example: BEML920313HMCLNS09
+          nombres:
+            type: string
+            description: Nombre(s) del Servidor Público
+            example: John Juan
+          primerApellido:
+            type: string
+            description: Primer apellido del servidor público
+            example: Pérez
+          segundoApellido:
+            type: string
+            description: Segundo apellido del servidor público
+            example: Mendez          
+    resError:
+      description: Estos valores son definidos por el sistema del API.
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: Código alfa numérico del error de la consulta.
+          example: abc123
+        message:
+          type: string
+          description: Texto descriptivo para el usuario final del error en la consulta
+          example: 'Error al formar la consulta, revise el formato de los campos.'
