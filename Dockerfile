@@ -1,7 +1,7 @@
 FROM node:12
 
-ADD . /s1_api_desarrollo
-WORKDIR /s1_api_desarrollo
+ADD . /s1_api_publico
+WORKDIR /s1_api_publico
 
 
 RUN yarn add global yarn \
