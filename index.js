@@ -85,7 +85,7 @@ app.use((req, res, next) => {
 app.post('/v2/declaraciones', swaggerValidation.validate, post_declaraciones);
 
 //app.post('/v1/spic', swaggerValidation.validate, post_spic);
-app.get('/v1/spic/dependencias', swaggerValidation.validate, get_dependencias);
+//app.get('/v1/spic/dependencias', swaggerValidation.validate, get_dependencias);
 
 app.get('/getVersion', async (req,res, next) => {
 	res.json({
