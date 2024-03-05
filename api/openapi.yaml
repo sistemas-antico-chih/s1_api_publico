@@ -91,4 +91,97 @@ components:
               example: true  
         results:
           $ref: '#/components/schemas/respSpic'
-   
+    reqSpic:
+      type: object
+      properties:
+        sort:
+          type: object
+          properties:
+            nombres:
+              type: string
+              enum:
+                - asc
+                - desc
+              description: 'Campo a ordenar de forma ascendente o descente'
+              example: asc
+            primerApellido:
+              type: string
+              enum:
+                - asc
+                - desc
+              description: 'Campo a ordenar de forma ascendente o descente'
+              example: asc
+            segundoApellido:
+              type: string
+              enum:
+                - asc
+                - desc
+              description: 'Campo a ordenar de forma ascendente o descente'
+              example: asc
+            institucionDependencia:
+              type: string
+              enum:
+                - asc
+                - desc
+              description: 'Campo a ordenar de forma ascendente o descente, se debe ordenar por el valor'
+              example: asc
+            puesto:
+              type: string
+              enum:
+                - asc
+                - desc
+              description: 'Campo a ordenar de forma ascendente o descente'
+              example: asc
+        page:
+          type: integer
+          description: Número de página a mostrar, por default 1
+          example: 1
+          default: 1
+        pageSize:
+          type: integer
+          description: >-
+            Número de registros a mostrar por página, el máximo permitido es
+            doscientos y el mínimo uno, por defecto muestra diez registros.
+            Por default 10
+          example: 10
+          default: 10
+        query:
+          properties:
+            id:
+              type: string
+              description: >-
+                Devuelve resultados al buscar un servidor público por su ID. Si se
+                especifica este valor, el objeto query es omitido.
+              example: 123abc
+            nombres:
+              type: string
+              description: Nombres o nombre de la persona.
+              example: Juan Pedro
+            primerApellido:
+              type: string
+              description: Primer apellido de la persona.
+              example: Tenorio
+            segundoApellido:
+              type: string
+              description: Segundo apellido de la persona.
+              example: Calderón
+            curp:
+              type: string
+              description: CURP de la persona.
+              example: PUXB571021HNELXR00
+            rfc:
+              type: string
+              description:  RFC de la persona
+              example: PUXB5710219K8
+            institucionDependencia:
+              type: string
+              description: >-
+                Se deberá señalar el Ente Público o entidad que corresponda al
+                Servidor Público.
+              example: Presidencia de la República
+            rfcSolicitante:
+              type: string
+              description: >-
+                RFC de la persona quien hace la consulta.
+              example: GOAP780710RH7
+    
