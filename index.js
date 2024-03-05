@@ -35,9 +35,9 @@ const swaggerDoc = jsyaml.safeLoad(spec);
 
 const serverPort = 8080;
 
-//let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
+let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
 
-/*swaggerDoc.components.securitySchemes = {
+swaggerDoc.components.securitySchemes = {
 	spic_auth,
 	BearerAuth: {
 		type: 'http',
@@ -45,10 +45,10 @@ const serverPort = 8080;
 		bearerFormat: 'JWT'
 	}
 };
-*/
+
 console.log();
 
-//swaggerValidation.init(swaggerDoc);
+swaggerValidation.init(swaggerDoc);
 const app = express();
 app.use(bodyParser.json());
 
