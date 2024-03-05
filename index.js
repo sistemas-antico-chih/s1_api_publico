@@ -29,15 +29,15 @@ const db = mongoose
 /************ Mongo DB ******************/
 /************ Mongo DB ******************/
 
-const standar = 'api/openapi.yaml';
-const spec = fs.readFileSync(standar, 'utf8');
-const swaggerDoc = jsyaml.safeLoad(spec);
+//const standar = 'api/openapi.yaml';
+//const spec = fs.readFileSync(standar, 'utf8');
+//const swaggerDoc = jsyaml.safeLoad(spec);
 
 const serverPort = 8080;
 
-let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
+//let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
 
-swaggerDoc.components.securitySchemes = {
+/*swaggerDoc.components.securitySchemes = {
 	spic_auth,
 	BearerAuth: {
 		type: 'http',
@@ -45,10 +45,10 @@ swaggerDoc.components.securitySchemes = {
 		bearerFormat: 'JWT'
 	}
 };
-
+*/
 console.log();
 
-swaggerValidation.init(swaggerDoc);
+//swaggerValidation.init(swaggerDoc);
 const app = express();
 app.use(bodyParser.json());
 
