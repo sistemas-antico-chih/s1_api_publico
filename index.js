@@ -49,12 +49,12 @@ swaggerDoc.components.securitySchemes = {
 // console.log(swaggerDoc.components.securitySchemes);
 
 let spic = '/v1/spic';
-let dependencias = '/v1/spic/dependencias';
-let declaraciones = '/v2/declaraciones';
+//let dependencias = '/v1/spic/dependencias';
+//let declaraciones = '/v2/declaraciones';
 swaggerDoc.paths[spic].post.security.push({ BearerAuth: [] });
 // console.log(swaggerDoc.paths[spic].post.security);
 
-swaggerDoc.paths[dependencias].get.security.push({ BearerAuth: [] });
+//swaggerDoc.paths[dependencias].get.security.push({ BearerAuth: [] });
 // console.log(swaggerDoc.paths[dependencias].get.security);
 
 console.log();

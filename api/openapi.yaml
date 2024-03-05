@@ -2,14 +2,13 @@ openapi: 3.0.0
 info:
   version: "1.1"
   title: >-
-    API del Registro de Servidores públicos de la Administración Pública Federal
-    que intervienen en procedimientos de contrataciones públicas.
+    API para interconectar la información de declaraciones del panel de captura desplegado por la SESNA.
 paths:
   /v1/spic:
     post:
       tags:
         - spic
-      summary: Servidores públicos que intervienen en contrataciones.
+      summary: API para interconectar Declaraciones patrimoniales.
       operationId: post_spic
       requestBody:
         description: JSON para peticiones de busqueda avanzada
@@ -43,39 +42,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/resError'
-      security:
-        - spic_auth: []
-  /v1/spic/dependencias:
-    get:
-      tags:
-        - spic
-      summary: Servidores públicos que intervienen en contrataciones
-      operationId: get_dependencias
-      responses:
-        '200':
-          description: Operación exitosa
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/dependencias'
-        '400':
-          description: Página invalida
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/resError'
-        '401':
-          description: No tienes permisos
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/resError'
-        default:
-          description: Unexpected Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/resError'        
       security:
         - spic_auth: []
 externalDocs:
