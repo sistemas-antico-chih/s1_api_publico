@@ -46,17 +46,6 @@ swaggerDoc.components.securitySchemes = {
 	}
 };
 
-// console.log(swaggerDoc.components.securitySchemes);
-
-//let spic = '/v1/spic';
-//let dependencias = '/v1/spic/dependencias';
-//let declaraciones = '/v2/declaraciones';
-//swaggerDoc.paths[spic].post.security.push({ BearerAuth: [] });
-// console.log(swaggerDoc.paths[spic].post.security);
-
-//swaggerDoc.paths[dependencias].get.security.push({ BearerAuth: [] });
-// console.log(swaggerDoc.paths[dependencias].get.security);
-
 console.log();
 
 swaggerValidation.init(swaggerDoc);
@@ -81,11 +70,7 @@ app.use((req, res, next) => {
 	next();
 });
 
-//app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.post('/v2/declaraciones', swaggerValidation.validate, post_declaraciones);
-
-//app.post('/v1/spic', swaggerValidation.validate, post_spic);
-//app.get('/v1/spic/dependencias', swaggerValidation.validate, get_dependencias);
 
 app.get('/getVersion', async (req,res, next) => {
 	res.json({
